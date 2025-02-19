@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Pistol : Weapon
 {
+    //Handles the shooting behavior of the weapon
     private void Update()
     {
         if (Input.GetButtonDown("Fire1"))
@@ -10,9 +11,11 @@ public class Pistol : Weapon
         }
     }
 
+    // This method overrides the parent class to modify the shooting behavior of the weapon class
     protected override void Shoot() { 
         bulletCount--;
 
+        // Call the parent class's Shoot method, which does the basic function of shooting
         base.Shoot();
 
         RaycastHit hit;
@@ -23,7 +26,9 @@ public class Pistol : Weapon
         }
     }
 
-    protected override void Reload() { 
+    // This method overrides the parent class to modify the reloading behavior of the weapon class
+    protected override void Reload() {
+        // Call the parent class's Reload method, which does the basic function of reloading
         base.Reload();
     }
 }
