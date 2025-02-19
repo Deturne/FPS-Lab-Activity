@@ -3,6 +3,7 @@ using Unity.Burst.Intrinsics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
+using num = System.Numerics;
 
 public class PlayerController : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] float jumpForce;
     [SerializeField] float gravity = 9.81f;
+
+    public int SpareRounds { get => spareRounds; set => spareRounds = value; }
 
 
     // Used to store the forward and backward movement input.
@@ -104,18 +107,27 @@ public class PlayerController : MonoBehaviour
         #endregion
         Vector3 movement = new Vector3(moveLR, 0, moveFB).normalized * movementSpeed;
 
-        if (Input.GetKeyDown(KeyCode.Space) && cc.isGrounded)
-        {
-            cc.Move(Vector3.up * jumpForce);
-        }
-
+        // If character is on the ground
         if (cc.isGrounded)
         {
-            movement.y = -2f;
+            // Prevent velocity from increasing infinitely
+            if (jumpVelocity.y < 0)
+            {
+                jumpVelocity.y = -2f; // Ensures player stays on ground
+            }
+
+            // Jumping
+            if (Input.GetKeyDown(KeyCode.Space)) 
+            {
+                Debug.Log("Jump");
+                jumpVelocity.y = jumpForce;
+            }
         }
-        else
+
+        // Apply gravity
+        if (!cc.isGrounded)
         {
-            movement.y -= gravity;
+            jumpVelocity.y -= gravity * Time.deltaTime;
         }
 
 
@@ -128,7 +140,7 @@ public class PlayerController : MonoBehaviour
         // Update our movement vector to take into account the current Player's rotation, and combine that with the current movement vector.
         movement = transform.rotation * movement;
 
-        cc.Move(movement * Time.deltaTime);
+        cc.Move((movement + jumpVelocity) * Time.deltaTime);
 
         //---------- Changed -----------------
         // Gravity and Jumping

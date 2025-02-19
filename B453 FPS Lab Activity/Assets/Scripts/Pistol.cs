@@ -11,6 +11,10 @@ public class Pistol : Weapon
     }
 
     protected override void Shoot() { 
+        bulletCount--;
+
+        base.Shoot();
+
         RaycastHit hit;
         Debug.DrawRay(firePoint.position, firePoint.forward * range, Color.red, 1f);
         if(Physics.Raycast(firePoint.position, firePoint.forward, out hit, range))
@@ -18,5 +22,8 @@ public class Pistol : Weapon
             Debug.Log(hit.transform.name);
         }
     }
-    protected override void Reload() { }
+
+    protected override void Reload() { 
+        base.Reload();
+    }
 }
