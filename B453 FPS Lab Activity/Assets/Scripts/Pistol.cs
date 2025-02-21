@@ -23,6 +23,15 @@ public class Pistol : Weapon
         if(Physics.Raycast(firePoint.position, firePoint.forward, out hit, range))
         {
             Debug.Log(hit.transform.name);
+
+            if (hit.collider != null)
+            {
+                IDamagable damagable = hit.collider.GetComponent<IDamagable>();
+                if (damagable != null)
+                {
+                    damagable.TakeDamage(damage);
+                }
+            }
         }
     }
 

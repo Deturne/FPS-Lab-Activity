@@ -7,7 +7,7 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] protected Transform firePoint;
 
     // How much damage this weapon does.
-    [SerializeField] protected float damage;
+    [SerializeField] protected int damage;
 
     // The range of this weapon.
     [SerializeField] protected float range;
