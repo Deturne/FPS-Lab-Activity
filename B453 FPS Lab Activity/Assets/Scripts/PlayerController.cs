@@ -92,10 +92,12 @@ public class PlayerController : MonoBehaviour
         // Get the right/left mouse movement for direction, and apply the sensitivity.
         // Get the up/down mouse movement for direction, apply the sensitivity, and subtract it from the previous rotY value.
         #endregion
-        moveFB = Input.GetAxis("Vertical") * movementSpeed;
-        moveLR = Input.GetAxis("Horizontal") * movementSpeed;
+        moveFB = Input.GetAxis("Vertical");
+        moveLR = Input.GetAxis("Horizontal");
         rotX = Input.GetAxis("Mouse X") * sensitivity;
         rotY -= Input.GetAxis("Mouse Y") * sensitivity;
+
+
 
         // Clamp the value of rotY between -60 degrees and +60 degrees.
         rotY = Mathf.Clamp(rotY, -60f, 60f);
@@ -105,7 +107,13 @@ public class PlayerController : MonoBehaviour
         // Notice we normalize the vector making it have a magnitude of 1. This essentially makes it a direction only vector, with no distance (speed).
         // Finally, we multiply by the movementSpeed to get our distance.
         #endregion
-        Vector3 movement = new Vector3(moveLR, 0, moveFB).normalized * movementSpeed;
+
+        Vector3 movement = Vector3.zero;
+
+        if (moveFB != 0 || moveLR != 0)
+        {
+            movement = new Vector3(moveLR, 0, moveFB).normalized * movementSpeed;
+        }
 
         // If character is on the ground
         if (cc.isGrounded)
@@ -182,5 +190,26 @@ public class PlayerController : MonoBehaviour
 
         **/
         #endregion
+    }
+
+    // For Itriggerable interface
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    ITriggerable triggerable = collision.gameObject.GetComponent<ITriggerable>();
+    //    if (triggerable != null)
+    //    {
+    //        triggerable.Trigger();
+    //    }
+
+    //    Debug.Log(collision.gameObject.name);
+    //}
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        ITriggerable triggerable = hit.gameObject.GetComponent<ITriggerable>();
+        if (triggerable != null)
+        {
+            triggerable.Trigger();
+        }
     }
 }
