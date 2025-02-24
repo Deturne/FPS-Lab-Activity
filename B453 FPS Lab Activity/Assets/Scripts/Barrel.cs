@@ -11,6 +11,6 @@ public class Barrel : MonoBehaviour, IDamagable
 
     public void TakeDamage(int damage)
     {
-        rb.AddForce(Vector3.up * 5000f);
+        rb.AddForce(Vector3.up * 10f,ForceMode.Impulse);
     }
 }
