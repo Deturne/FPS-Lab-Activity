@@ -829,7 +829,7 @@ GameObject:
   - component: {fileID: 793958506}
   - component: {fileID: 793958505}
   - component: {fileID: 793958504}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -937,6 +937,10 @@ PrefabInstance:
     - target: {fileID: 139238, guid: ea39c929a43fec843a8747fa0f34346e, type: 3}
       propertyPath: m_Name
       value: Barrel (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 139238, guid: ea39c929a43fec843a8747fa0f34346e, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 421944, guid: ea39c929a43fec843a8747fa0f34346e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7095,6 +7099,10 @@ PrefabInstance:
     - target: {fileID: 139238, guid: ea39c929a43fec843a8747fa0f34346e, type: 3}
       propertyPath: m_Name
       value: Barrel (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 139238, guid: ea39c929a43fec843a8747fa0f34346e, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 421944, guid: ea39c929a43fec843a8747fa0f34346e, type: 3}
       propertyPath: m_LocalPosition.x
