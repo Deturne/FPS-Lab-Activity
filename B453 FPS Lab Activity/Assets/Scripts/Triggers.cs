@@ -36,7 +36,6 @@ public class Triggers : MonoBehaviour, ITriggerable
         StartCoroutine(Cooldown());
     }
 
-
     protected IEnumerator Cooldown()
     {
         canTrigger = false;
