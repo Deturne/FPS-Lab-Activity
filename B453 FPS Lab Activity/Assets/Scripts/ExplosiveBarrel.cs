@@ -26,12 +26,14 @@ public class ExplosiveBarrel : Triggers
 
     public void Explode()
     {
-        // First store the position of the C4.
+        // First store the position of the barrel.
         Vector3 position = transform.position;
-        // Generate a sphere colider at the position of the c4 with a radius equal to the blast radius
+
+        // Generate a sphere colider at the position of the barrel with a radius equal to the blast radius
         // Store all objects hit by this collider in an array.
         LayerMask mask = LayerMask.GetMask("Knockback");
         Collider[] hitColliders = Physics.OverlapSphere(position, radius, mask);
+
         // Cycle through each object in the array of hit things.
         foreach (Collider thing in hitColliders)
         {
